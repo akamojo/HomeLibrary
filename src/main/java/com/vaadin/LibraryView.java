@@ -44,8 +44,14 @@ public class LibraryView extends VerticalLayout {
 		grid.addColumn(Book::getStatus).setHeader("Status").setFlexGrow(0)
 	    .setWidth("100px")
 	    .setResizable(false);
+		grid.addColumn(Book::getLoanDate).setHeader("Loan Date").setFlexGrow(0)
+	    .setWidth("100px")
+	    .setResizable(false);
+		grid.addColumn(Book::getBackDate).setHeader("Back Date").setFlexGrow(0)
+	    .setWidth("100px")
+	    .setResizable(false);
 
-		grid.setWidth("300px");
+		grid.setWidth("500px");
 		
 		grid.asSingleSelect().addValueChangeListener(event -> {
 			form.setBook(event.getValue());

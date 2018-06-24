@@ -1,5 +1,7 @@
 package com.vaadin;
 
+import java.util.Date;
+
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.dialog.Dialog;
@@ -20,6 +22,7 @@ public class BookForm extends FormLayout {
 	private LibraryView view;
 	private Binder<Book> binder = new Binder<>(Book.class);
 	private CommentsView comments = new CommentsView();
+	private boolean wasOnLoan = false;
 
 	public BookForm(LibraryView libraryView) {
 	    this.view = libraryView;
@@ -58,15 +61,22 @@ public class BookForm extends FormLayout {
 	}
 
 	private void save() {
-		if(service.findByTitleAndAuthor(book.getTitle(), book.getAuthor()) == null) {
+//		if(service.findByTitleAndAuthor(book.getTitle(), book.getAuthor()) == null) {
+			if(book.getStatus() == BookStatus.OnLoan && !wasOnLoan) {
+				wasOnLoan = true;
+				book.setLoanDate(new Date());
+			} else if (book.getStatus() == BookStatus.Available && wasOnLoan) {
+				wasOnLoan = false;
+				book.setBackDate(new Date());
+			}
 		    service.save(book);
 		    view.updateList();
 		    setBook(null);
-		} else {
-			Dialog dialog = new Dialog();
-			dialog.add(new Label("That book already exists in your library."));
-			dialog.open();
-			setBook(null);
-		}
+//		} else {
+//			Dialog dialog = new Dialog();
+//			dialog.add(new Label("That book already exists in your library."));
+//			dialog.open();
+//			setBook(null);
+//		}
 	}
 }

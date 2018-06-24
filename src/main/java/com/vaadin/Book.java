@@ -2,6 +2,8 @@ package com.vaadin;
 
 import java.awt.List;
 import java.io.Serializable;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -15,7 +17,31 @@ public class Book implements Serializable, Cloneable {
 	private String title = "";
 	private BookStatus status;
 	private HashMap<Long, Comment> comments = new HashMap<>();
+	private Date loanDate = null;
+	private Date backDate = null;
 	
+	public String getLoanDate() {
+		SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+		if (loanDate == null)
+			return "";
+		return df.format(loanDate);
+	}
+
+	public void setLoanDate(Date loanDate) {
+		this.loanDate = loanDate;
+	}
+
+	public String getBackDate() {
+		SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+		if (backDate == null)
+			return "";
+		return df.format(backDate);
+	}
+
+	public void setBackDate(Date backDate) {
+		this.backDate = backDate;
+	}
+
 	public ArrayList<Comment> findAll() {
 		ArrayList<Comment> pom = new ArrayList<>();
 		for(Comment c : comments.values()) {
