@@ -25,9 +25,6 @@ public class AccountService {
 	private AccountService() {
 	}
 
-	/**
-	 * @return a reference to an example facade for Customer objects.
-	 */
 	public static AccountService getInstance() {
 		if (instance == null) {
 			instance = new AccountService();
@@ -67,30 +64,14 @@ public class AccountService {
 		return null;
 	}
 
-
-	/**
-	 * @return the amount of all customers in the system
-	 */
 	public synchronized long count() {
 		return contacts.size();
 	}
 
-	/**
-	 * Deletes a customer from a system
-	 *
-	 * @param value
-	 *            the Customer to be deleted
-	 */
 	public synchronized void delete(Account value) {
 		contacts.remove(value.getId());
 	}
 
-	/**
-	 * Persists or updates customer in the system. Also assigns an identifier
-	 * for new Customer instances.
-	 *
-	 * @param entry
-	 */
 	public synchronized void save(Account entry) {
 		if (entry == null) {
 			LOGGER.log(Level.SEVERE,

@@ -11,13 +11,9 @@ import java.util.logging.Logger;
 
 public class Book implements Serializable, Cloneable {
 	private Long id;
-
 	private String author = "";
-
 	private String title = "";
-
 	private BookStatus status;
-	
 	private HashMap<Long, Comment> comments = new HashMap<>();
 	
 	public ArrayList<Comment> findAll() {
@@ -26,7 +22,6 @@ public class Book implements Serializable, Cloneable {
 			try {
 				pom.add(c.clone());
 			} catch (CloneNotSupportedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

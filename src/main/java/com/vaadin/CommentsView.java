@@ -32,7 +32,7 @@ public class CommentsView extends VerticalLayout{
 		main.setAlignItems(Alignment.START);
 		main.setSizeFull();
 		add(main);
-		setHeight("100vh");
+		setHeight("50vh");
 	}
 	
 	public void updateList() {

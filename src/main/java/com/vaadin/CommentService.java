@@ -13,13 +13,9 @@ public class CommentService {
 	private static CommentService instance;
 	private static final Logger LOGGER = Logger.getLogger(CommentService.class.getName());
 
-	private final HashMap<Long, Comment> comments = new HashMap<>();
 	private long nextId = 0;
 	private Book book;
 
-	public HashMap<Long, Comment> getComments() {
-		return comments;
-	}
 
 	private CommentService() {
 	}
@@ -32,9 +28,6 @@ public class CommentService {
 		this.book = book;
 	}
 
-	/**
-	 * @return a reference to an example facade for Customer objects.
-	 */
 	public static CommentService getInstance() {
 		if (instance == null) {
 			instance = new CommentService();
@@ -47,22 +40,10 @@ public class CommentService {
 		return book.getComments().size();
 	}
 
-	/**
-	 * Deletes a customer from a system
-	 *
-	 * @param value
-	 *            the Customer to be deleted
-	 */
 	public synchronized void delete(Comment value) {
 		book.getComments().remove(value.getId());
 	}
 
-	/**
-	 * Persists or updates customer in the system. Also assigns an identifier
-	 * for new Customer instances.
-	 *
-	 * @param entry
-	 */
 	public synchronized void save(Comment entry) {
 		if (entry == null) {
 			LOGGER.log(Level.SEVERE,

@@ -13,16 +13,12 @@ public class BookService {
 	private static BookService instance;
 	private static final Logger LOGGER = Logger.getLogger(BookService.class.getName());
 
-	private final HashMap<Long, Book> books = new HashMap<>();
 	private long nextId = 0;
 	private Account account;
 
 	private BookService() {
 	}
 
-	/**
-	 * @return a reference to an example facade for Customer objects.
-	 */
 	public static BookService getInstance() {
 		if (instance == null) {
 			instance = new BookService();
@@ -38,34 +34,14 @@ public class BookService {
 		this.account = account;
 	}
 
-	public HashMap<Long, Book> getBooks() {
-		return books;
-	}
-
-
-	/**
-	 * @return the amount of all customers in the system
-	 */
 	public synchronized long count() {
 		return account.getBooks().size();
 	}
 
-	/**
-	 * Deletes a customer from a system
-	 *
-	 * @param value
-	 *            the Customer to be deleted
-	 */
 	public synchronized void delete(Book value) {
 		account.getBooks().remove(value.getId());
 	}
 
-	/**
-	 * Persists or updates customer in the system. Also assigns an identifier
-	 * for new Customer instances.
-	 *
-	 * @param entry
-	 */
 	public synchronized void save(Book entry) {
 		if (entry == null) {
 			LOGGER.log(Level.SEVERE,
@@ -87,14 +63,6 @@ public class BookService {
 		return findAll(null);
 	}
 
-	/**
-	 * Finds all Customer's that match given filter.
-	 *
-	 * @param stringFilter
-	 *            filter that returned objects should match or null/empty string
-	 *            if all objects should be returned.
-	 * @return list a Customer objects
-	 */
 	public synchronized List<Book> findAll(String stringFilter) {
 		ArrayList<Book> arrayList = new ArrayList<>();
 		for (Book contact : account.getBooks().values()) {

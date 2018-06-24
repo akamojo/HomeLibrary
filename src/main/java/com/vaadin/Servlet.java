@@ -17,8 +17,4 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(urlPatterns = "/*", name = "UIServlet", asyncSupported = true)
 @VaadinServletConfiguration(productionMode = false)
 public class Servlet extends VaadinServlet {
-//	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-//		resp.setContentType("text/plain");
-//		resp.getWriter().println("Hello");
-//	}
 }

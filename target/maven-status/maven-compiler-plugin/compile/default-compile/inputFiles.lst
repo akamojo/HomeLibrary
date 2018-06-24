@@ -8,9 +8,6 @@ D:\work\Tata\HomeLibrary\src\main\java\com\vaadin\AuthorisationComponent.java
 D:\work\Tata\HomeLibrary\src\main\java\com\vaadin\MainView.java
 D:\work\Tata\HomeLibrary\src\main\java\com\vaadin\Comment.java
 D:\work\Tata\HomeLibrary\src\main\java\com\vaadin\CommentForm.java
-D:\work\Tata\HomeLibrary\src\main\java\com\vaadin\CustomerStatus.java
-D:\work\Tata\HomeLibrary\src\main\java\com\vaadin\CustomerForm.java
-D:\work\Tata\HomeLibrary\src\main\java\com\vaadin\Customer.java
 D:\work\Tata\HomeLibrary\src\main\java\com\vaadin\AccountForm.java
 D:\work\Tata\HomeLibrary\src\main\java\com\vaadin\BookForm.java
 D:\work\Tata\HomeLibrary\src\main\java\com\vaadin\LibraryView.java
@@ -18,4 +15,3 @@ D:\work\Tata\HomeLibrary\src\main\java\com\vaadin\CommentsView.java
 D:\work\Tata\HomeLibrary\src\main\java\com\vaadin\CommentService.java
 D:\work\Tata\HomeLibrary\src\main\java\com\vaadin\Account.java
 D:\work\Tata\HomeLibrary\src\main\java\com\vaadin\Book.java
-D:\work\Tata\HomeLibrary\src\main\java\com\vaadin\CustomerService.java

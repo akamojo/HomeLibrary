@@ -17,7 +17,7 @@ public class AuthorisationComponent extends Div implements HasUrlParameter<Strin
 		if(AccountService.getInstance().getContacts().get(Long.parseLong(parameter)) != null)
 			AccountService.getInstance().getContacts().get(Long.parseLong(parameter)).setAuthorised(true);
 		
-		Label lab = new Label(String.format("Authorised, %s!", parameter));
+		Label lab = new Label(String.format("Authorised!", parameter));
 		NativeButton button = new NativeButton("Log in!");
 		button.addClickListener( e-> {
 		     button.getUI().ifPresent(ui -> ui.navigate(""));

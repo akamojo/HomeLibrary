@@ -103,9 +103,6 @@ public class AccountForm extends FormLayout {
 				dialog.open();
 			}
 		}
-//		service.save(account);
-//		view.log(acc);
-//		setAccount(null);
 	}
 	
 	private enum Choice {
