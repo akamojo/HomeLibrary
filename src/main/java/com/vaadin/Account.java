@@ -11,8 +11,15 @@ public class Account implements Serializable, Cloneable {
 	private String password = "";
 	private boolean authorised = false;
 	private HashMap<Long, Book> books = new HashMap<>();
+	private Long otherAccount = -1l;
 	
 	
+	public Long getOtherAccount() {
+		return otherAccount;
+	}
+	public void setOtherAccount(Long otherAccount) {
+		this.otherAccount = otherAccount;
+	}
 	public HashMap<Long, Book> getBooks() {
 		return books;
 	}

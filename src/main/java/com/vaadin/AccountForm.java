@@ -61,7 +61,11 @@ public class AccountForm extends FormLayout {
 			if(acc != null) {
 				if(acc.getPassword().equals(account.getPassword())) {
 					if(acc.isAuthorised()) {
-						view.log(acc);
+						if(acc.getOtherAccount() != -1l) {
+							view.log(service.getContacts().get(acc.getOtherAccount()), acc.getName());
+						} else
+							view.log(acc, acc.getName());
+						
 						setAccount(null);
 					} else {
 						Dialog dialog = new Dialog();

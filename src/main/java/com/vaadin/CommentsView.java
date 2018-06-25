@@ -12,17 +12,18 @@ public class CommentsView extends VerticalLayout{
 	private CommentService service = CommentService.getInstance();
 	private Book book;
 	
-	public CommentsView() {
+	public CommentsView(String user) {
 		form = new CommentForm(this);
 		
 		Button addCommentBtn = new Button("Add new comment");
 		addCommentBtn.addClickListener(e -> {
 			grid.asSingleSelect().clear();
-			form.setComment(new Comment());
+			form.setComment(new Comment(user));
 		});
 
 		grid.setSizeFull();
 		
+		grid.addColumn(Comment::getUser).setHeader("User");
 		grid.addColumn(Comment::getText).setHeader("Text");		
 		grid.asSingleSelect().addValueChangeListener(event -> {
 			form.setComment(event.getValue());

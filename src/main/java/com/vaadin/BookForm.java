@@ -21,12 +21,13 @@ public class BookForm extends FormLayout {
 	private Book book;
 	private LibraryView view;
 	private Binder<Book> binder = new Binder<>(Book.class);
-	private CommentsView comments = new CommentsView();
+	private CommentsView comments;
 	private boolean wasOnLoan = false;
 
-	public BookForm(LibraryView libraryView) {
+	public BookForm(LibraryView libraryView, String user) {
 	    this.view = libraryView;
-	    	    
+	    this.comments = new CommentsView(user);
+	    
 	    status.setItems(BookStatus.values());
 	    binder.bindInstanceFields(this);
 	    save.getElement().setAttribute("theme", "primary");

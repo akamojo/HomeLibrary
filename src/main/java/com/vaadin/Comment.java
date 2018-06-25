@@ -7,6 +7,10 @@ public class Comment implements Serializable, Cloneable {
 	private String text = "";
 	private Long id;
 	
+	public Comment(String user) {
+		this.user = user;
+	}
+	
 	public String getUser() {
 		return user;
 	}

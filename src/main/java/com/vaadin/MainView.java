@@ -25,15 +25,21 @@ public class MainView extends VerticalLayout {
 
 	private AccountForm acc = new AccountForm(this);
 	private LibraryView lib;
+	public static Long otherAccount = -1l;
 
 	public MainView() {
-		acc.setAccount(new Account());
+		Account newAccount = new Account();
+		if (otherAccount != -1l) {
+			newAccount.setOtherAccount(otherAccount);
+			otherAccount = -1l;
+		}
+		acc.setAccount(newAccount);
 		add(acc);
 		setHeight("100vh");
 	}
 	
-	public void log(Account account) {
-		lib = new LibraryView(account);
+	public void log(Account account, String user) {
+		lib = new LibraryView(account, user);
 		removeAll();
 		add(lib);
 	}

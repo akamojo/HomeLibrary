@@ -23,10 +23,8 @@ public class CommentForm extends FormLayout {
 	    save.addClickListener(e -> this.save());
 	    delete.addClickListener(e -> this.delete());
 	    HorizontalLayout buttons = new HorizontalLayout(save, delete);
-	    
 
 	    add(text, buttons);
-
 	    setComment(null);
 	}
 	

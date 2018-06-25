@@ -1,7 +1,12 @@
 package com.vaadin;
 
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.HtmlEmail;
+
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcons;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -14,10 +19,11 @@ public class LibraryView extends VerticalLayout {
 	private BookService service = BookService.getInstance();
 	private Grid<Book> grid = new Grid<>();
 	private TextField filterText = new TextField();
-	private BookForm form = new BookForm(this);
+	private BookForm form;
 
-	public LibraryView(Account account) {		
+	public LibraryView(Account account, String user) {		
 		service.setAccount(account);
+		this.form = new BookForm(this, user);
 		
 		filterText.setPlaceholder("Filter by name...");
 		filterText.setValueChangeMode(ValueChangeMode.EAGER);
@@ -31,7 +37,11 @@ public class LibraryView extends VerticalLayout {
 			grid.asSingleSelect().clear();
 			form.setBook(new Book());
 		});
-		HorizontalLayout toolbar = new HorizontalLayout(filtering, addBookBtn);
+		
+		Button inviteToLibrary = new Button("Invite user to your library");
+		inviteToLibrary.addClickListener(e -> invite());
+		
+		HorizontalLayout toolbar = new HorizontalLayout(inviteToLibrary, filtering, addBookBtn);
 
 		grid.setSizeFull();
 		
@@ -64,6 +74,45 @@ public class LibraryView extends VerticalLayout {
 		add(toolbar, main);
 		setHeight("100vh");
 		updateList();
+	}
+	
+	public void invite() {
+		Dialog dialog = new Dialog();
+
+		dialog.setCloseOnEsc(false);
+		dialog.setCloseOnOutsideClick(false);
+
+		Label instructions = new Label("Type an email address of a person you want to invite.");
+		TextField mail = new TextField();
+		
+		Button confirmButton = new Button("Confirm", event -> {
+			HtmlEmail email = new HtmlEmail();
+			email.setHostName("smtp.gmail.com");
+			email.setSmtpPort(465);
+			email.setSSLOnConnect(true);
+			email.setAuthentication("kwiatek.homelibrary@gmail.com", "testowehaslo1");
+			
+			try {
+				email.setFrom("homelibrary@gmail.com");
+				email.addTo(mail.getValue());
+				email.setSubject("You have an invitation");
+				email.setHtmlMsg("<a href=\"http://localhost:8080/invite/" + service.getAccount().getId() + "\">Invitation</a>");
+				email.send();
+				
+			} catch (EmailException e) {
+				e.printStackTrace();
+			}
+		    dialog.close();
+		});
+		Button cancelButton = new Button("Cancel", event -> {
+		    dialog.close();
+		});
+		
+		HorizontalLayout buttons = new HorizontalLayout(confirmButton, cancelButton);
+		VerticalLayout main = new VerticalLayout(instructions, mail, buttons);
+		main.setAlignItems(Alignment.CENTER);
+		dialog.add(main);
+		dialog.open();
 	}
 
 	public void updateList() {
