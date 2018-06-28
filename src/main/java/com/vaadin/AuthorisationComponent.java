@@ -7,17 +7,23 @@ import com.vaadin.flow.component.html.NativeButton;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.BeforeEvent;
 import com.vaadin.flow.router.HasUrlParameter;
+import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 @Route(value = "auth")
+@PageTitle("HL Authorisation")
 public class AuthorisationComponent extends Div implements HasUrlParameter<String> {
 
 	@Override
 	public void setParameter(BeforeEvent event, String parameter) {
-		if(AccountService.getInstance().getContacts().get(Long.parseLong(parameter)) != null)
+		Label lab;
+		if(AccountService.getInstance().getContacts().get(Long.parseLong(parameter)) != null) {
 			AccountService.getInstance().getContacts().get(Long.parseLong(parameter)).setAuthorised(true);
+			lab = new Label("Authorised!");
+		} else {
+			lab = new Label("No such account!");
+		}
 		
-		Label lab = new Label("Authorised!");
 		NativeButton button = new NativeButton("Log in!");
 		button.addClickListener( e-> {
 		     button.getUI().ifPresent(ui -> ui.navigate(""));
