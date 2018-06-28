@@ -14,12 +14,14 @@ import com.vaadin.flow.component.page.Page;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
+import com.vaadin.flow.data.validator.EmailValidator;
 
 public class AccountForm extends FormLayout {
 	private Label label = new Label("Welcome to Home Library service!");
 	private ComboBox<Choice> choice = new ComboBox<>("Choose wisely");
 	private TextField name = new TextField("Username");
 	private TextField email = new TextField("Email");
+	private Label emailStatus = new Label();
 	private PasswordField password = new PasswordField("Password");
 	private Button ok = new Button("GO");
 	private AccountService service = AccountService.getInstance();
@@ -30,7 +32,15 @@ public class AccountForm extends FormLayout {
 	
 	public AccountForm(MainView mainView) {
 		this.view = mainView;
+		
+		emailStatus.getStyle().set("color", "red");
+		
 		binder.bindInstanceFields(this);
+		binder.forField(email)
+		.withValidator(new EmailValidator("This doesn't look like a valid email address..."))
+		.withStatusLabel(emailStatus)
+		.bind(Account::getEmail, Account::setEmail);
+		
 		password.setRevealButtonVisible(false);
 		ok.getElement().setAttribute("theme", "primary");
 		ok.addClickListener(e -> this.ok());
@@ -39,7 +49,9 @@ public class AccountForm extends FormLayout {
 			currentChoice = e.getValue();
 		});
 		
-	    VerticalLayout layout = new VerticalLayout(label, choice, name, email, password, ok);
+		HorizontalLayout emailStuff = new HorizontalLayout(email, emailStatus);
+		
+	    VerticalLayout layout = new VerticalLayout(label, choice, name, emailStuff, password, ok);
 		add(layout);
 
 	    setAccount(null);
@@ -71,6 +83,7 @@ public class AccountForm extends FormLayout {
 						Dialog dialog = new Dialog();
 						VerticalLayout labels = new VerticalLayout(new Label("Click an activation link in the email we sent you."), 
 								new Label("If you didn't receive the email please contact with admin."));
+						labels.setAlignItems(Alignment.CENTER);
 						dialog.add(labels);
 						dialog.open();
 					}

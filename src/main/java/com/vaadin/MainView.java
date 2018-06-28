@@ -30,12 +30,12 @@ public class MainView extends VerticalLayout {
 	public static Long otherAccount = -1l;
 
 	public MainView() {
-		Account newAccount = new Account();
+		Account currentAccount = new Account();
 		if (otherAccount != -1l) {
-			newAccount.setOtherAccount(otherAccount);
+			currentAccount.setOtherAccount(otherAccount);
 			otherAccount = -1l;
 		}
-		acc.setAccount(newAccount);
+		acc.setAccount(currentAccount);
 		add(acc);
 		setHeight("100vh");
 	}

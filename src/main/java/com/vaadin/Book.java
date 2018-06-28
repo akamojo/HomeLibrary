@@ -21,7 +21,7 @@ public class Book implements Serializable, Cloneable {
 	private Date backDate = null;
 	
 	public String getLoanDate() {
-		SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+		SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy HH:mm");
 		if (loanDate == null)
 			return "";
 		return df.format(loanDate);
@@ -32,7 +32,7 @@ public class Book implements Serializable, Cloneable {
 	}
 
 	public String getBackDate() {
-		SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+		SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy HH:mm");
 		if (backDate == null)
 			return "";
 		return df.format(backDate);

@@ -34,13 +34,13 @@ public class AccountService {
 	
 	public void sendEmail(Account account) {
 		HtmlEmail email = new HtmlEmail();
-		email.setHostName("smtp.gmail.com");
+		email.setHostName("smtp.googlemail.com");
 		email.setSmtpPort(465);
 		email.setSSLOnConnect(true);
 		email.setAuthentication("kwiatek.homelibrary@gmail.com", "testowehaslo1");
 		
 		try {
-			email.setFrom("homelibrary@gmail.com");
+			email.setFrom("kwiatek.homelibrary@gmail.com");
 			email.addTo(account.getEmail());
 			email.setSubject("Potwierdz swoje haslo");
 			email.setHtmlMsg("<a href=\"http://localhost:8080/auth/" + account.getId() + "\">Authorise account</a>");
